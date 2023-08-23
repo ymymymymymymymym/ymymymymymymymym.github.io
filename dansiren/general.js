@@ -1,19 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
-    loadContent("./parts/header.html", "header");
-    loadContent("./parts/totop.html", "totop");
+    loadContent("https:/ykmsms.github.io/dansiren/parts/header.html", "header");
+    loadContent("https:/ykmsms.github.io/dansiren/parts/totop.html", "totop");
 });
 
 //パーツの一括読み込み
 function loadItem(parts) {
-    loadContent(`./parts/${parts}.html`, parts);
+    loadContent(`https:/ykmsms.github.io/dansiren/parts/${parts}.html`, parts);
     const head = document.querySelector(parts);
     const partsCSS = document.createElement("link");
     partsCSS.rel = "stylesheet";
-    partsCSS.href = `./parts/${parts}.css`;
+    partsCSS.href = `https:/ykmsms.github.io/dansiren/parts/${parts}.css`;
     head.appendChild(partsCSS);
     const body = document.querySelector("body");
     const partsJS = document.createElement("script");
-    partsJS.src = `./parts/${parts}.js`;
+    partsJS.src = `https:/ykmsms.github.io/dansiren/parts/${parts}.js`;
     body.appendChild(partsJS);
 }
 
