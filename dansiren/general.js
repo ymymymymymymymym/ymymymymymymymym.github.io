@@ -8,11 +8,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //パーツの一括読み込み
 function loadItem(parts) {
-    loadContent(`https://ykmsms.github.io/dansiren/parts/${parts}.html`, parts);
-    const body = document.querySelector("body");
-    const partsJS = document.createElement("script");
-    partsJS.src = `https://ykmsms.github.io/dansiren/parts/${parts}.js`;
-    body.appendChild(partsJS);
+    if (document.getElementById(parts) != null) {
+        loadContent(`https://ykmsms.github.io/dansiren/parts/${parts}.html`, parts);
+        const body = document.querySelector("body");
+        const partsJS = document.createElement("script");
+        partsJS.src = `https://ykmsms.github.io/dansiren/parts/${parts}.js`;
+        body.appendChild(partsJS);
+    }
 }
 
 //パーツの読み込み

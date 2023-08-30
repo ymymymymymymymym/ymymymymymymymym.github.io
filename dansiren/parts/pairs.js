@@ -80,7 +80,7 @@ document.getElementById("selectAllBtn").addEventListener("click", function() {
     }
 });
 //スピンボタン
-//document.addEventListener("DOMActive", function () 
+//document.addEventListener("DOMContentLoaded", function () 
 {
     const roundsInput = document.querySelector("#rounds");
     const spinnerDown = document.querySelector(".spinnerDown");
