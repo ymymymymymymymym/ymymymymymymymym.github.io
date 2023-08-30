@@ -1,37 +1,36 @@
-    <div id="pairs">
-        <div id="step1">
-            <h2>メンバー選択</h2>
-            <div id="memberButtons">
-                <label class="buttonDiv">
-                    <input type="file" id="fileInput" class="buttonMain" accept=".csv">
-                    <span class="material-symbols-outlined">upload_file</span>
-                </label>
-                <label class="buttonDiv">
-                    <button id="selectAllBtn" class="buttonMain">全て選択</button>
-                    <span id="selectAllIcon" class="material-symbols-outlined">done_all</span>
-                </label>
-            </div>
-            <div id="membersBox"></div>
-        </div>
-
-        <h2>ペア練の回数</h2>
-        <div class="spinButton">
-            <span class="spinnerDown">-</span>
-            <input type="number" id="rounds" min="1" max="20" value="4" step="1">
-            <span class="spinnerUp">+</span>
-        </div>
-        <br>
-        <a id="generateButton" class="glowingBtn">
-            <span class="glowingBtn-background"></span>
-            <span class="glowingBtn-item">ペアを作成</span>
-        </a>
-        
-        <h2>結果</h2>
+<div id="step1">
+    <h2>メンバー選択</h2>
+    <div id="memberButtons">
         <label class="buttonDiv">
-            <button id="copyButton" class="buttonMain">クリップボードにコピー</button>
-            <span id="selectAllIcon" class="material-symbols-outlined">content_copy</span>
+            <input type="file" id="fileInput" class="buttonMain" accept=".csv">
+            <span class="material-symbols-outlined">upload_file</span>
         </label>
-        <table id="pairsTable"></table>
-
-        <script src="https://ykmsms.github.io/dansiren/parts/pairs.js"></script>
+        <label class="buttonDiv">
+            <button id="selectAllBtn" class="buttonMain">全て選択</button>
+            <span id="selectAllIcon" class="material-symbols-outlined">done_all</span>
+        </label>
     </div>
+    <div id="membersBox"></div>
+</div>
+<div id="step2">
+    <h2>ペア練の回数</h2>
+    <div class="spinButton">
+        <span class="spinnerDown">-</span>
+        <input type="number" id="rounds" min="1" max="20" value="4" step="1">
+        <span class="spinnerUp">+</span>
+    </div>
+    <br>
+    <a id="generateButton" class="glowingBtn">
+        <span class="glowingBtn-background"></span>
+        <span class="glowingBtn-item">ペアを作成</span>
+    </a>
+</div>
+<div id="step3">
+    <h2>結果</h2>
+    <label class="buttonDiv">
+        <button id="copyButton" class="buttonMain">クリップボードにコピー</button>
+        <span id="selectAllIcon" class="material-symbols-outlined">content_copy</span>
+    </label>
+    <table id="pairsTable"></table>
+</div>
+<script src="https://ykmsms.github.io/dansiren/parts/pairs.js"></script>
