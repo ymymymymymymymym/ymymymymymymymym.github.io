@@ -80,7 +80,8 @@ document.getElementById("selectAllBtn").addEventListener("click", function() {
     }
 });
 //スピンボタン
-document.addEventListener("DOMContentLoaded", function () {
+//document.addEventListener("DOMActive", function () 
+{
     const roundsInput = document.querySelector("#rounds");
     const spinnerDown = document.querySelector(".spinnerDown");
     const spinnerUp = document.querySelector(".spinnerUp");
@@ -115,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 初期状態のボタンステートを更新
     updateButtonStates(parseInt(roundsInput.value));
-});
+} //);
 
 document.getElementById("copyButton").addEventListener("click", function() {
     let output = [];
