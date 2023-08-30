@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-    loadContent("https://ykmsms.github.io/dansiren/parts/header.html", "header");
-    loadContent("https://ykmsms.github.io/dansiren/parts/totop.html", "totop");
+    const elements = ["header", "totop", "home", "groups", "members", "pairs"];
+    elements.forEach(element => {
+        loadContent(`https://ykmsms.github.io/dansiren/parts/${element}.html`, element);
+    });
 });
 
 //パーツの一括読み込み
@@ -19,9 +21,11 @@ function loadItem(parts) {
 
 //パーツの読み込み
 function loadContent(url, elementId) {
-    fetch(url)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById(elementId).innerHTML = data;
-        });
+    if (document.getElementById(elementId) != null) {
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById(elementId).innerHTML = data;
+            });
+    }
 }
