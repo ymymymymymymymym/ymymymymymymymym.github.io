@@ -81,7 +81,9 @@ document.getElementById("selectAllBtn").addEventListener("click", function() {
 });
 //スピンボタン
 //document.addEventListener("DOMContentLoaded", function () 
-{
+makeSpinner()
+
+function makeSpinner() {
     const roundsInput = document.querySelector("#rounds");
     const spinnerDown = document.querySelector(".spinnerDown");
     const spinnerUp = document.querySelector(".spinnerUp");
