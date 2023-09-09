@@ -1,148 +1,150 @@
-document.getElementById("fileInput").addEventListener("change", function(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    
-    reader.onload = function(e) {
-        const content = e.target.result;
-        const membersDiv = document.getElementById("membersBox");
-        membersDiv.innerHTML = "";
+document.addEventListener('load', function() {
+    document.getElementById("fileInput").addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
         
-        const lines = content.trim().split("\n");
-        const header = lines[0].split(",");
-        
-        for (let i = 1; i < lines.length; i++) {
-            const values = lines[i].split(",");
-            const memberName = values[0];
-            const memberDiv = document.createElement("label");
-            memberDiv.classList.add("member");
-
-            const checkBox = document.createElement("input");
-            checkBox.type = "checkbox";
-            checkBox.name = "members";
-            checkBox.classList.add("memberBox");
-            checkBox.value = memberName;
-            memberDiv.appendChild(checkBox);
-
-            const dummyInput = document.createElement("span");
-            dummyInput.classList.add("dummyInput");
-            memberDiv.appendChild(dummyInput);
+        reader.onload = function(e) {
+            const content = e.target.result;
+            const membersDiv = document.getElementById("membersBox");
+            membersDiv.innerHTML = "";
             
-            const label = document.createElement("span");
-            label.classList.add("memberLabel");
-            label.textContent = memberName;
-            memberDiv.appendChild(label);
+            const lines = content.trim().split("\n");
+            const header = lines[0].split(",");
+            
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(",");
+                const memberName = values[0];
+                const memberDiv = document.createElement("label");
+                memberDiv.classList.add("member");
 
-            membersDiv.appendChild(memberDiv);
-            //membersDiv.appendChild(document.createElement("br"));
-        }
-    };
-    
-    reader.readAsText(file);
-});
+                const checkBox = document.createElement("input");
+                checkBox.type = "checkbox";
+                checkBox.name = "members";
+                checkBox.classList.add("memberBox");
+                checkBox.value = memberName;
+                memberDiv.appendChild(checkBox);
 
-document.getElementById("generateButton").addEventListener("click", function() {
-    const rounds = parseInt(document.getElementById("rounds").value);
-    const fileInput = document.getElementById("fileInput");
-    const selectedFile = fileInput.files[0];
+                const dummyInput = document.createElement("span");
+                dummyInput.classList.add("dummyInput");
+                memberDiv.appendChild(dummyInput);
+                
+                const label = document.createElement("span");
+                label.classList.add("memberLabel");
+                label.textContent = memberName;
+                memberDiv.appendChild(label);
 
-    if (!selectedFile) {
-        alert("CSVファイルを選択してください。");
-        return;
-    }
-
-    const fileReader = new FileReader();
-
-    fileReader.onload = function(event) {
-        const csvData = event.target.result;
-        const membersData = parseCSV(csvData);
-        const selectedMembers = Array.from(document.querySelectorAll("input[name='members']:checked")).map(checkbox => checkbox.value);
-        const selectedMembersData = membersData.filter(member => selectedMembers.includes(member.name));
-        const pairs = generatePairs(selectedMembersData, rounds);
-        const pairsOutput = pairs.map(roundPairs => roundPairs.map(index => selectedMembersData[index].name));
-        displayPairs(pairsOutput);
-    };
-
-    fileReader.readAsText(selectedFile);
-});
-
-//全選択ボタン
-document.getElementById("selectAllBtn").addEventListener("click", function() {
-    const membersDiv = document.getElementById("membersBox");
-    let membersNames = membersDiv.querySelectorAll(".memberBox");
-    let buttonIcon = document.getElementById("selectAllIcon");
-
-    if (buttonIcon.innerText == "done_all") {
-        membersNames.forEach(box => {box.checked = true});
-        buttonIcon.innerText = "select";
-    } else if (buttonIcon.innerText == "select") {
-        membersNames.forEach(box => {box.checked = false});
-        buttonIcon.innerText = "done_all";
-    }
-});
-//スピンボタン
-//document.addEventListener("DOMContentLoaded", function () 
-makeSpinner()
-
-function makeSpinner() {
-    const roundsInput = document.querySelector("#rounds");
-    const spinnerDown = document.querySelector(".spinnerDown");
-    const spinnerUp = document.querySelector(".spinnerUp");
-    
-    const minValue = parseInt(roundsInput.getAttribute("min"));
-    const maxValue = parseInt(roundsInput.getAttribute("max"));
-    const stepValue = parseInt(roundsInput.getAttribute("step"));
-
-    function updateInputValue(newValue) {
-        roundsInput.value = newValue;
-        updateButtonStates(newValue);
-    }
-
-    function updateButtonStates(value) {
-        spinnerDown.classList.toggle("disabled", value <= minValue);
-        spinnerUp.classList.toggle("disabled", value >= maxValue);
-    }
-
-    spinnerDown.addEventListener("click", function () {
-        const currentValue = parseInt(roundsInput.value);
-        if (currentValue > minValue) {
-            updateInputValue(currentValue - stepValue);
-        }
+                membersDiv.appendChild(memberDiv);
+                //membersDiv.appendChild(document.createElement("br"));
+            }
+        };
+        
+        reader.readAsText(file);
     });
 
-    spinnerUp.addEventListener("click", function () {
-        const currentValue = parseInt(roundsInput.value);
-        if (currentValue < maxValue) {
-            updateInputValue(currentValue + stepValue);
+    document.getElementById("generateButton").addEventListener("click", function() {
+        const rounds = parseInt(document.getElementById("rounds").value);
+        const fileInput = document.getElementById("fileInput");
+        const selectedFile = fileInput.files[0];
+
+        if (!selectedFile) {
+            alert("CSVファイルを選択してください。");
+            return;
         }
+
+        const fileReader = new FileReader();
+
+        fileReader.onload = function(event) {
+            const csvData = event.target.result;
+            const membersData = parseCSV(csvData);
+            const selectedMembers = Array.from(document.querySelectorAll("input[name='members']:checked")).map(checkbox => checkbox.value);
+            const selectedMembersData = membersData.filter(member => selectedMembers.includes(member.name));
+            const pairs = generatePairs(selectedMembersData, rounds);
+            const pairsOutput = pairs.map(roundPairs => roundPairs.map(index => selectedMembersData[index].name));
+            displayPairs(pairsOutput);
+        };
+
+        fileReader.readAsText(selectedFile);
     });
 
-    // 初期状態のボタンステートを更新
-    updateButtonStates(parseInt(roundsInput.value));
-} //);
+    //全選択ボタン
+    document.getElementById("selectAllBtn").addEventListener("click", function() {
+        const membersDiv = document.getElementById("membersBox");
+        let membersNames = membersDiv.querySelectorAll(".memberBox");
+        let buttonIcon = document.getElementById("selectAllIcon");
 
-document.getElementById("copyButton").addEventListener("click", function() {
-    let output = [];
-    let table = document.getElementById("pairsTable");
-    let rows = table.querySelectorAll("tr");
-    console.log(rows);
-    rows.forEach(row => {
-        let rowText = [];
-        let cells = row.querySelectorAll("td");
-        cells.forEach(cell => {
-            rowText.push(cell.innerHTML);
+        if (buttonIcon.innerText == "done_all") {
+            membersNames.forEach(box => {box.checked = true});
+            buttonIcon.innerText = "select";
+        } else if (buttonIcon.innerText == "select") {
+            membersNames.forEach(box => {box.checked = false});
+            buttonIcon.innerText = "done_all";
+        }
+    });
+    //スピンボタン
+    //document.addEventListener("DOMContentLoaded", function () 
+    makeSpinner()
+
+    function makeSpinner() {
+        const roundsInput = document.querySelector("#rounds");
+        const spinnerDown = document.querySelector(".spinnerDown");
+        const spinnerUp = document.querySelector(".spinnerUp");
+        
+        const minValue = parseInt(roundsInput.getAttribute("min"));
+        const maxValue = parseInt(roundsInput.getAttribute("max"));
+        const stepValue = parseInt(roundsInput.getAttribute("step"));
+
+        function updateInputValue(newValue) {
+            roundsInput.value = newValue;
+            updateButtonStates(newValue);
+        }
+
+        function updateButtonStates(value) {
+            spinnerDown.classList.toggle("disabled", value <= minValue);
+            spinnerUp.classList.toggle("disabled", value >= maxValue);
+        }
+
+        spinnerDown.addEventListener("click", function () {
+            const currentValue = parseInt(roundsInput.value);
+            if (currentValue > minValue) {
+                updateInputValue(currentValue - stepValue);
+            }
         });
 
-        rowText = rowText.join("\t")
-        output.push(rowText);
-    })
+        spinnerUp.addEventListener("click", function () {
+            const currentValue = parseInt(roundsInput.value);
+            if (currentValue < maxValue) {
+                updateInputValue(currentValue + stepValue);
+            }
+        });
 
-    output = output.join("\n");
-    if (!navigator.clipboard) {
-        alert("クリップボードにコピーできませんでした。");
-        return false;
-    }
-    navigator.clipboard.writeText(output);
-    return true;
+        // 初期状態のボタンステートを更新
+        updateButtonStates(parseInt(roundsInput.value));
+    } //);
+
+    document.getElementById("copyButton").addEventListener("click", function() {
+        let output = [];
+        let table = document.getElementById("pairsTable");
+        let rows = table.querySelectorAll("tr");
+        console.log(rows);
+        rows.forEach(row => {
+            let rowText = [];
+            let cells = row.querySelectorAll("td");
+            cells.forEach(cell => {
+                rowText.push(cell.innerHTML);
+            });
+
+            rowText = rowText.join("\t")
+            output.push(rowText);
+        })
+
+        output = output.join("\n");
+        if (!navigator.clipboard) {
+            alert("クリップボードにコピーできませんでした。");
+            return false;
+        }
+        navigator.clipboard.writeText(output);
+        return true;
+    });
 });
 
 function parseCSV(csvData) {
