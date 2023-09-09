@@ -14,6 +14,8 @@ function loadItem(parts) {
         const partsJS = document.createElement("script");
         partsJS.src = `https://ykmsms.github.io/dansiren/parts/${parts}.js`;
         body.appendChild(partsJS);
+    } else {
+        return;
     }
 }
 
