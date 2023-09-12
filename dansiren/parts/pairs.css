@@ -94,8 +94,6 @@
     display: flex;
     flex-flow: column wrap;
     overflow: scroll;
-    border-radius: 10px;
-    box-shadow: 5px 5px 20px rgba(0,0,0,.3);
 }
 #pairs #membersBox::-webkit-scrollbar {
     display:none;

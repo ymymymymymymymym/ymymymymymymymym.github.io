@@ -3,8 +3,9 @@ body {
     font-family: "Meiryo", "メイリオ", sans-serif;
 }
 .displayBox {
-    min-height: 50px;
+    min-height: 100px;
     width: 100%;
     border-radius: 10px;
     box-shadow: 5px 5px 20px rgba(0,0,0,.3);
+    padding: 10px;
 }
