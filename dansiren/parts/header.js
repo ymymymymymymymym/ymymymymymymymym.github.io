@@ -3,6 +3,7 @@ while (true) {
         main();
         break;
     } catch {
+        setTimeout(()=>{}, 100);
         continue;
     }
 }
