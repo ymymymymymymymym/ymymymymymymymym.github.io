@@ -2,14 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const elements = ["header", "totop", "home", "groups", "members", "pairs"];
     elements.forEach(element => {
         //loadContent(`https://ykmsms.github.io/dansiren/parts/${element}.html`, element);
-        while (true) {
-            try {
-                loadItem(element);
-                break;
-            } catch {
-                continue;
-            }
-        }
+        loadItem(element);
     });
 });
 

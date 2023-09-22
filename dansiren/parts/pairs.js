@@ -1,87 +1,98 @@
-document.getElementById("fileInput").addEventListener("change", function(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    
-    reader.onload = function(e) {
-        const content = e.target.result;
-        const membersDiv = document.getElementById("membersBox");
-        membersDiv.innerHTML = "";
-        
-        const lines = content.trim().split("\n");
-        const header = lines[0].split(",");
-        
-        for (let i = 1; i < lines.length; i++) {
-            const values = lines[i].split(",");
-            const memberName = values[0];
-            const memberDiv = document.createElement("label");
-            memberDiv.classList.add("member");
+while (true) {
+    try {
+        main();
+        break;
+    } catch {
+        continue;
+    }
+}
 
-            const checkBox = document.createElement("input");
-            checkBox.type = "checkbox";
-            checkBox.name = "members";
-            checkBox.classList.add("memberBox");
-            checkBox.value = memberName;
-            memberDiv.appendChild(checkBox);
-
-            const dummyInput = document.createElement("span");
-            dummyInput.classList.add("dummyInput");
-            memberDiv.appendChild(dummyInput);
+function main() {
+    document.getElementById("fileInput").addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            const content = e.target.result;
+            const membersDiv = document.getElementById("membersBox");
+            membersDiv.innerHTML = "";
             
-            const label = document.createElement("span");
-            label.classList.add("memberLabel");
-            label.textContent = memberName;
-            memberDiv.appendChild(label);
+            const lines = content.trim().split("\n");
+            const header = lines[0].split(",");
+            
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(",");
+                const memberName = values[0];
+                const memberDiv = document.createElement("label");
+                memberDiv.classList.add("member");
 
-            membersDiv.appendChild(memberDiv);
-            //membersDiv.appendChild(document.createElement("br"));
+                const checkBox = document.createElement("input");
+                checkBox.type = "checkbox";
+                checkBox.name = "members";
+                checkBox.classList.add("memberBox");
+                checkBox.value = memberName;
+                memberDiv.appendChild(checkBox);
+
+                const dummyInput = document.createElement("span");
+                dummyInput.classList.add("dummyInput");
+                memberDiv.appendChild(dummyInput);
+                
+                const label = document.createElement("span");
+                label.classList.add("memberLabel");
+                label.textContent = memberName;
+                memberDiv.appendChild(label);
+
+                membersDiv.appendChild(memberDiv);
+                //membersDiv.appendChild(document.createElement("br"));
+            }
+        };
+        
+        reader.readAsText(file);
+    });
+
+    document.getElementById("generateButton").addEventListener("click", function() {
+        const rounds = parseInt(document.getElementById("rounds").value);
+        const fileInput = document.getElementById("fileInput");
+        const selectedFile = fileInput.files[0];
+
+        if (!selectedFile) {
+            alert("CSVファイルを選択してください。");
+            return;
         }
-    };
-    
-    reader.readAsText(file);
-});
 
-document.getElementById("generateButton").addEventListener("click", function() {
-    const rounds = parseInt(document.getElementById("rounds").value);
-    const fileInput = document.getElementById("fileInput");
-    const selectedFile = fileInput.files[0];
+        const fileReader = new FileReader();
 
-    if (!selectedFile) {
-        alert("CSVファイルを選択してください。");
-        return;
-    }
+        fileReader.onload = function(event) {
+            const csvData = event.target.result;
+            const membersData = parseCSV(csvData);
+            const selectedMembers = Array.from(document.querySelectorAll("input[name='members']:checked")).map(checkbox => checkbox.value);
+            const selectedMembersData = membersData.filter(member => selectedMembers.includes(member.name));
+            const pairs = generatePairs(selectedMembersData, rounds);
+            const pairsOutput = pairs.map(roundPairs => roundPairs.map(index => selectedMembersData[index].name));
+            displayPairs(pairsOutput);
+        };
 
-    const fileReader = new FileReader();
+        fileReader.readAsText(selectedFile);
+    });
 
-    fileReader.onload = function(event) {
-        const csvData = event.target.result;
-        const membersData = parseCSV(csvData);
-        const selectedMembers = Array.from(document.querySelectorAll("input[name='members']:checked")).map(checkbox => checkbox.value);
-        const selectedMembersData = membersData.filter(member => selectedMembers.includes(member.name));
-        const pairs = generatePairs(selectedMembersData, rounds);
-        const pairsOutput = pairs.map(roundPairs => roundPairs.map(index => selectedMembersData[index].name));
-        displayPairs(pairsOutput);
-    };
+    //全選択ボタン
+    document.getElementById("selectAllBtn").addEventListener("click", function() {
+        const membersDiv = document.getElementById("membersBox");
+        let membersNames = membersDiv.querySelectorAll(".memberBox");
+        let buttonIcon = document.getElementById("selectAllIcon");
 
-    fileReader.readAsText(selectedFile);
-});
-
-//全選択ボタン
-document.getElementById("selectAllBtn").addEventListener("click", function() {
-    const membersDiv = document.getElementById("membersBox");
-    let membersNames = membersDiv.querySelectorAll(".memberBox");
-    let buttonIcon = document.getElementById("selectAllIcon");
-
-    if (buttonIcon.innerText == "done_all") {
-        membersNames.forEach(box => {box.checked = true});
-        buttonIcon.innerText = "select";
-    } else if (buttonIcon.innerText == "select") {
-        membersNames.forEach(box => {box.checked = false});
-        buttonIcon.innerText = "done_all";
-    }
-});
-//スピンボタン
-//document.addEventListener("DOMContentLoaded", function () 
-makeSpinner()
+        if (buttonIcon.innerText == "done_all") {
+            membersNames.forEach(box => {box.checked = true});
+            buttonIcon.innerText = "select";
+        } else if (buttonIcon.innerText == "select") {
+            membersNames.forEach(box => {box.checked = false});
+            buttonIcon.innerText = "done_all";
+        }
+    });
+    //スピンボタン
+    //document.addEventListener("DOMContentLoaded", function () 
+    makeSpinner();
+}
 
 function makeSpinner() {
     const roundsInput = document.querySelector("#rounds");
