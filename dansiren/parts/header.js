@@ -7,6 +7,6 @@ window.addEventListener("scroll", function() {
     }else if(window.pageYOffset < 200){
         //header.style.opacity = '1';
         header.style.backgroundColor ='rgba(255,255,255,1)';
-        header.style.backdropFilter = NaN;
+        header.style.backdropFilter = '0';
     }
 });
