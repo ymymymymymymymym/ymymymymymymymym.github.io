@@ -3,7 +3,8 @@ while (true) {
         main();
         break;
     } catch {
-        setTimeout(()=>{}, 100);
+        console.log('failed to load "totop.js"');
+        setTimeout(()=>{return;}, 100);
         continue;
     }
 }
