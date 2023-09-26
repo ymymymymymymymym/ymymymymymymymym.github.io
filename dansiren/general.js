@@ -4,30 +4,41 @@ function main() {
     const elements = ["header", "totop", "home", "groups", "members", "pairs"];
     elements.forEach(element => {
         //loadContent(`https://ykmsms.github.io/dansiren/parts/${element}.html`, element);
-        loadItem(element);
+        loadHTML(element);
+    });
+    elements.forEach(element => {
+        loadJS(element);
     });
 }
 
 //パーツの一括読み込み
 function loadItem(parts) {
     if (document.getElementById(parts) != null) {
-        loadContent(`https://ykmsms.github.io/dansiren/parts/${parts}.html`, parts);
-        const body = document.querySelector("body");
-        const partsJS = document.createElement("script");
-        partsJS.src = `https://ykmsms.github.io/dansiren/parts/${parts}.js`;
-        body.appendChild(partsJS);
+        loadHTML(`https://ykmsms.github.io/dansiren/parts/${parts}.html`, parts);
+        loadJS(parts);
     } else {
         return;
     }
 }
 
 //パーツの読み込み
-function loadContent(url, elementId) {
-    if (document.getElementById(elementId) != null) {
-        fetch(url)
+function loadHTML(parts) {
+    if (document.getElementById(parts) != null) {
+        fetch(`https://ykmsms.github.io/dansiren/parts/${parts}.html`)
             .then(response => response.text())
             .then(data => {
                 document.getElementById(elementId).innerHTML = data;
             });
+    }
+}
+
+function loadJS(parts) {
+    if (document.getElementById(parts) != null) {
+        const body = document.querySelector("body");
+        const partsJS = document.createElement("script");
+        partsJS.src = `https://ykmsms.github.io/dansiren/parts/${parts}.js`;
+        body.appendChild(partsJS);
+    } else {
+        return;
     }
 }
