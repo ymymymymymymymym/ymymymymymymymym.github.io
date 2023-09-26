@@ -14,7 +14,7 @@ function main() {
 //パーツの一括読み込み
 function loadItem(parts) {
     if (document.getElementById(parts) != null) {
-        loadHTML(`https://ykmsms.github.io/dansiren/parts/${parts}.html`, parts);
+        loadHTML(parts);
         loadJS(parts);
     } else {
         return;
@@ -27,7 +27,7 @@ function loadHTML(parts) {
         fetch(`https://ykmsms.github.io/dansiren/parts/${parts}.html`)
             .then(response => response.text())
             .then(data => {
-                document.getElementById(elementId).innerHTML = data;
+                document.getElementById(parts).innerHTML = data;
             });
     }
 }
