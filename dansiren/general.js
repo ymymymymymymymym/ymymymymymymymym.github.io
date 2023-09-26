@@ -1,10 +1,12 @@
-document.addEventListener("DOMContentLoaded", function () {
+main();
+
+function main() {
     const elements = ["header", "totop", "home", "groups", "members", "pairs"];
     elements.forEach(element => {
         //loadContent(`https://ykmsms.github.io/dansiren/parts/${element}.html`, element);
         loadItem(element);
     });
-});
+}
 
 //パーツの一括読み込み
 function loadItem(parts) {
