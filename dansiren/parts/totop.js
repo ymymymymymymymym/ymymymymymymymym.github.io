@@ -1,13 +1,4 @@
-while (true) {
-    try {
-        main();
-        break;
-    } catch {
-        console.log('failed to load "totop.js"');
-        setTimeout(()=>{return;}, 100);
-        continue;
-    }
-}
+main();
 
 function main() {
     const scrollToTopBtn = document.querySelector('#scrollToTopBtn');

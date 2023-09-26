@@ -1,13 +1,4 @@
-while (true) {
-    try {
-        main();
-        break;
-    } catch {
-        console.log('failed to load "pairs.js"');
-        setTimeout(()=>{return;}, 100);
-        continue;
-    }
-}
+main();
 
 function main() {
     document.getElementById("fileInput").addEventListener("change", function(event) {

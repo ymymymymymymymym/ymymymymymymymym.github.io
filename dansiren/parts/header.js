@@ -1,13 +1,4 @@
-while (true) {
-    try {
-        main();
-        break;
-    } catch {
-        console.log('failed to load "header.js"');
-        setTimeout(()=>{return;}, 100);
-        continue;
-    }
-}
+main();
 
 function main() {
     window.addEventListener("scroll", function() {
