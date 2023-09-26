@@ -6,9 +6,11 @@ function main() {
         //loadContent(`https://ykmsms.github.io/dansiren/parts/${element}.html`, element);
         loadHTML(element);
     });
-    elements.forEach(element => {
-        loadJS(element);
-    });
+    window.onload = function() {
+        elements.forEach(element => {
+            loadJS(element);
+        });
+    };
 }
 
 //パーツの一括読み込み
