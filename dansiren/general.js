@@ -4,13 +4,8 @@ function main() {
     const elements = ["header", "totop", "home", "groups", "members", "pairs"];
     elements.forEach(element => {
         //loadContent(`https://ykmsms.github.io/dansiren/parts/${element}.html`, element);
-        loadHTML(element);
+        loadItem2(element);
     });
-    window.onload = function() {
-        elements.forEach(element => {
-            loadJS(element);
-        });
-    };
 }
 
 //パーツの一括読み込み
@@ -20,6 +15,17 @@ function loadItem(parts) {
         loadJS(parts);
     } else {
         return;
+    }
+}
+//パーツの一括読み込みv2
+function loadItem2(parts) {
+    if (document.getElementById(parts) != null) {
+        fetch(`https://ykmsms.github.io/dansiren/parts/${parts}.html`)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById(parts).innerHTML = data;
+                document.getElementById(parts).onload = loadJS(parts);
+            });
     }
 }
 
