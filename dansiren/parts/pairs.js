@@ -128,7 +128,6 @@ document.getElementById("copyButton").addEventListener("click", function() {
     let output = [];
     let table = document.getElementById("pairsTable");
     let rows = table.querySelectorAll("tr");
-    console.log(rows);
     rows.forEach(row => {
         let rowText = [];
         let cells = row.querySelectorAll("td");
