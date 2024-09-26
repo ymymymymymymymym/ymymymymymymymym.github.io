@@ -14,9 +14,9 @@ function main() {
                 const workbook = XLSX.read(data, {type: "array"});
 
                 const sheetName = workbook.SheetNames[0];
-                console.log(sheetName);
                 const worksheet = workbook.Sheets[sheetName];
                 content = XLSX.utils.sheet_to_csv(worksheet);
+                console.log(content);
 
             } else {
                 content = e.target.result;
