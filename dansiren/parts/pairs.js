@@ -103,9 +103,9 @@ function main() {
         };
 
         if (fileExtension == "xlsx") {
-            fileReader.readAsArrayBuffer(file);
+            fileReader.readAsArrayBuffer(selectedFile);
         } else if (fileExtension == "csv") {
-            fileReader.readAsText(file);
+            fileReader.readAsText(selectedFile);
         }
     });
 
