@@ -217,7 +217,7 @@ function generatePairs(members, nGames) {
             gradePlayers.forEach(player => player.games++);
             remainingGames -= gradePlayers.length;
         } else if (remainingGames > 0) {
-            const randomIndexes = getRandomIndexes(gradePlayers.length, remainingGames);
+            const randomIndexes = getRandomIndeces(gradePlayers.length, remainingGames);
             randomIndexes.forEach(index => gradePlayers[index].games++);
             remainingGames = 0;
         } else {
@@ -238,6 +238,7 @@ function generatePairs(members, nGames) {
 }
 
 function makeOpponents(players, nGames) {
+    // プレイする8人を対戦する4人組×2に分ける
     let gamesList = players.map(player => player.games);
     let opponents = Array.from({length: nGames}, (_,i) => Array(8));
     for (let i = 0; i < nGames; i++) {
@@ -253,7 +254,7 @@ function makeOpponents(players, nGames) {
     return opponents;
 }
 
-function getRandomIndexes(maxIndex, count) {
+function getRandomIndeces(maxIndex, count) {
     const indexes = Array.from({ length: maxIndex }, (_, i) => i);
     for (let i = indexes.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
