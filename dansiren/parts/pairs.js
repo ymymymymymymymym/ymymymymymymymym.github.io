@@ -7,15 +7,17 @@ function main() {
         const reader = new FileReader();
         
         reader.onload = function(e) {
+            let content;
+
             if (fileExtension == "xlsx") {
                 const data = new Uint8Array(e.target.result);
                 const workbook = XLSX.read(data, {type: "array"});
 
                 const sheetName = workbook.SheetNames[0];
                 const worksheet = workbook.Sheets[sheetName];
-                var content = XLSX.utils.sheet_to_csv(worksheet);
+                content = XLSX.utils.sheet_to_csv(worksheet);
             } else {
-                var content = e.target.result;
+                content = e.target.result;
             }
 
             const membersDiv = document.getElementById("membersBox");
