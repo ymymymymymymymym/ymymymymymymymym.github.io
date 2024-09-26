@@ -18,3 +18,12 @@ h2 {
     text-shadow: 0 0 30px black;
     user-select: none;
 }
+
+img {
+    pointer-events: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-touch-callout: none;
+    -moz-user-select: none;
+    user-select: none;
+}
