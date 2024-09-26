@@ -12,7 +12,7 @@
 
 #helpContent {
     position: relative;
-    max-width: 60%;
+    max-width: 100%;
     margin: auto;
     overflow: hidden;
 }
@@ -26,6 +26,7 @@
     scroll-margin: 10px;
 }
 .slide {
+    margin: 10px;
     width: 100%;
     height: auto;
     scroll-snap-align: center;
