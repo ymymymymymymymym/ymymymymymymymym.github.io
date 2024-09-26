@@ -19,6 +19,7 @@ function main() {
             } else {
                 content = e.target.result;
             }
+            console.log(content);
 
             const membersDiv = document.getElementById("membersBox");
             membersDiv.innerHTML = "";
