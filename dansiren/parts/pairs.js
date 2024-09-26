@@ -3,8 +3,7 @@ main();
 function main() {
     document.getElementById("fileInput").addEventListener("change", function(event) {
         const file = event.target.files[0];
-        console.log(file.name)
-        const fileExtension = file.name.spilt(".").pop().toLowerCase();
+        const fileExtension = file.name.split(".").pop().toLowerCase();
         const reader = new FileReader();
         
         reader.onload = function(e) {
