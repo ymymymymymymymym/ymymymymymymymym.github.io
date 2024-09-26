@@ -27,18 +27,18 @@
     scroll-snap-stop: always;
 }
 .slide.first {
-    margin-left: calc(50% - max(30vh, 30vw));
+    margin-left: calc(50% - min(30vh, 30vw));
 }
 .slide.last {
-    margin-right: calc(50% - max(30vh, 30vw));
+    margin-right: calc(50% - min(30vh, 30vw));
 }
 .explanation {
     height: 100px;
-    width: max(60vh, 60vw);
+    width: min(60vh, 60vw);
 }
 .slide img {
     height: 65vh;
-    width: max(60vh, 60vw);
+    width: min(60vh, 60vw);
     border-radius: 10px;
     box-shadow: 5px 5px 20px rgba(0,0,0,.3);
 }
