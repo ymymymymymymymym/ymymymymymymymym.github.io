@@ -42,3 +42,15 @@
     border-radius: 10px;
     box-shadow: 5px 5px 20px rgba(0,0,0,.3);
 }
+.dots {
+    display: flex;
+}
+#dot {
+    height: 6px;
+    width: 6px;
+    border-radius: 3px;
+    opacity: 0.5;
+}
+#dot#dot-highlighted {
+    opacity: 0.9;
+}
