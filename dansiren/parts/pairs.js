@@ -14,17 +14,12 @@ function main() {
                 const workbook = XLSX.read(data, {type: "array"});
 
                 const sheetName = workbook.SheetNames[0];
-                console.log(workbook.sheetNames);
-                console.log(workbook.SheetNames[0]);
                 const worksheet = workbook.Sheets[sheetName];
-                console.log(worksheet);
+                
                 content = XLSX.utils.sheet_to_csv(worksheet);
-                console.log(content);
-
             } else {
                 content = e.target.result;
             }
-            console.log(content);
 
             const membersDiv = document.getElementById("membersBox");
             membersDiv.innerHTML = "";
@@ -59,7 +54,13 @@ function main() {
             }
         };
         
-        reader.readAsText(file);
+        if (fileExtension == "xlsx") {
+            reader.readAsArrayBuffer(file);
+        } else if (fileExtension == "csv") {
+            reader.readAsText(file);
+        } else {
+            alert("サポートされていないファイル形式です")
+        }
     });
 
     document.getElementById("generateButton").addEventListener("click", function() {
