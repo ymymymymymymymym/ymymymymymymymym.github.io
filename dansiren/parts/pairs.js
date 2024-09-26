@@ -72,6 +72,7 @@ function main() {
         const rounds = parseInt(document.getElementById("rounds").value);
         const fileInput = document.getElementById("fileInput");
         const selectedFile = fileInput.files[0];
+        const fileExtension = selectedFile.name.split(".").pop().toLowerCase();
 
         if (!selectedFile) {
             alert("ファイルを選択してください。");
