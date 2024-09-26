@@ -18,7 +18,7 @@ function main() {
 
                 content = XLSX.utils.sheet_to_csv(worksheet);
 
-            } else (fileExtension == "csv") {
+            } else if (fileExtension == "csv") {
                 content = e.target.result;
             }
 
