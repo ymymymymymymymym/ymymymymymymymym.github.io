@@ -2,6 +2,10 @@
     padding-top: 100px;
 }
 
+.p {
+    padding-bottom: 20px;
+}
+
 #helpContent {
     position: relative;
     width: 100%;
@@ -33,6 +37,7 @@
     width: max(60vh, 60vw);
 }
 .slide img {
+    height: 65vh;
     width: max(60vh, 60vw);
     border-radius: 10px;
     box-shadow: 5px 5px 20px rgba(0,0,0,.3);
