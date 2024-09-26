@@ -18,7 +18,7 @@ function main() {
 
                 content = XLSX.utils.sheet_to_csv(worksheet);
 
-            } else {
+            } else (fileExtension == "csv") {
                 content = e.target.result;
             }
 
@@ -27,8 +27,6 @@ function main() {
             
             const lines = content.trim().split("\n");
             const header = lines[0].split(",");
-            console.log(lines);
-            console.log(header);
             
             for (let i = 1; i < lines.length; i++) {
                 const values = lines[i].split(",");
@@ -58,7 +56,7 @@ function main() {
 
             //全選択ボタンを初期状態にする
             let buttonIcon = document.getElementById("selectAllIcon");
-            buttonIcon.innerText = "select";
+            buttonIcon.innerText = "done_all";
         };
         
         if (fileExtension == "xlsx") {
@@ -83,7 +81,18 @@ function main() {
         const fileReader = new FileReader();
 
         fileReader.onload = function(event) {
-            const csvData = event.target.result;
+            let csvData;
+
+            if (fileExtension == "xlsx") {
+                const data = new Uint8Array(event.target.result);
+                const workbook = XLSX.read(data, {type: "array"});
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                csvData = XLSX.utils.sheet_to_csv(worksheet);
+            } else if (fileExtension == "csv") {
+                csvData = event.target.result;
+            }
+
             const membersData = parseCSV(csvData);
             const selectedMembers = Array.from(document.querySelectorAll("input[name='members']:checked")).map(checkbox => checkbox.value);
             const selectedMembersData = membersData.filter(member => selectedMembers.includes(member.name));
@@ -92,7 +101,11 @@ function main() {
             displayPairs(pairsOutput);
         };
 
-        fileReader.readAsText(selectedFile);
+        if (fileExtension == "xlsx") {
+            fileReader.readAsArrayBuffer(file);
+        } else if (fileExtension == "csv") {
+            fileReader.readAsText(file);
+        }
     });
 
     //全選択ボタン
