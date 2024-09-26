@@ -15,7 +15,7 @@ function main() {
 
                 const sheetName = workbook.SheetNames[0];
                 const worksheet = workbook.Sheets[sheetName];
-                content = XLSX.utils.sheet_to_csv(worksheet);
+                content = XLSX.utils.sheet_to_json(worksheet, {header: 1});
             } else {
                 content = e.target.result;
             }
