@@ -37,7 +37,7 @@
     width: min(60vh, 60vw);
 }
 .slide img {
-    height: 65vh;
+    height: min(65vh, 65vw);
     width: min(60vh, 60vw);
     border-radius: 10px;
     box-shadow: 5px 5px 20px rgba(0,0,0,.3);
