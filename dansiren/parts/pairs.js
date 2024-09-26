@@ -3,6 +3,7 @@ main();
 function main() {
     document.getElementById("fileInput").addEventListener("change", function(event) {
         const file = event.target.files[0];
+        console.log(file.name)
         const fileExtension = file.name.spilt(".").pop().toLowerCase();
         const reader = new FileReader();
         
@@ -17,6 +18,7 @@ function main() {
             } else {
                 const content = e.target.result;
             }
+
             const membersDiv = document.getElementById("membersBox");
             membersDiv.innerHTML = "";
             
