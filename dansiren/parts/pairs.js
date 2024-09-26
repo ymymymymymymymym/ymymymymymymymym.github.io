@@ -3,10 +3,20 @@ main();
 function main() {
     document.getElementById("fileInput").addEventListener("change", function(event) {
         const file = event.target.files[0];
+        const fileExtension = file.name.spilt(".").pop().toLowerCase();
         const reader = new FileReader();
         
         reader.onload = function(e) {
-            const content = e.target.result;
+            if (fileExtension == "xlsx") {
+                const data = Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, {type: "array"});
+
+                const sheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[sheetName];
+                const content = XLSX.utils.sheet_to_csv(worksheet);
+            } else {
+                const content = e.target.result;
+            }
             const membersDiv = document.getElementById("membersBox");
             membersDiv.innerHTML = "";
             
