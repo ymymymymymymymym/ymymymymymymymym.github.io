@@ -11,3 +11,10 @@ body {
     padding: 10px;
     align-items: center;
 }
+
+h2 {
+    text-align: center;
+    padding: 30px;
+    text-shadow: 0 0 30px black;
+    user-select: none;
+}
