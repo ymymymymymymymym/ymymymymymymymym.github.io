@@ -14,6 +14,7 @@ function main() {
                 const workbook = XLSX.read(data, {type: "array"});
 
                 const sheetName = workbook.SheetNames[0];
+                console.log(workbook.sheetNames);
                 const worksheet = workbook.Sheets[sheetName];
                 console.log(worksheet);
                 content = XLSX.utils.sheet_to_csv(worksheet);
