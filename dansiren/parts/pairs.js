@@ -13,9 +13,9 @@ function main() {
 
                 const sheetName = workbook.SheetNames[0];
                 const worksheet = workbook.Sheets[sheetName];
-                const content = XLSX.utils.sheet_to_csv(worksheet);
+                var content = XLSX.utils.sheet_to_csv(worksheet);
             } else {
-                const content = e.target.result;
+                var content = e.target.result;
             }
 
             const membersDiv = document.getElementById("membersBox");
