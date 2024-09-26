@@ -17,17 +17,18 @@ function main() {
                 const worksheet = workbook.Sheets[sheetName];
 
                 content = XLSX.utils.sheet_to_csv(worksheet);
-                
+
             } else {
                 content = e.target.result;
             }
-            console.log(content);
 
             const membersDiv = document.getElementById("membersBox");
             membersDiv.innerHTML = "";
             
             const lines = content.trim().split("\n");
             const header = lines[0].split(",");
+            console.log(lines);
+            console.log(header);
             
             for (let i = 1; i < lines.length; i++) {
                 const values = lines[i].split(",");
@@ -54,6 +55,10 @@ function main() {
                 membersDiv.appendChild(memberDiv);
                 //membersDiv.appendChild(document.createElement("br"));
             }
+
+            //全選択ボタンを初期状態にする
+            let buttonIcon = document.getElementById("selectAllIcon");
+            buttonIcon.innerText = "select";
         };
         
         if (fileExtension == "xlsx") {
@@ -71,7 +76,7 @@ function main() {
         const selectedFile = fileInput.files[0];
 
         if (!selectedFile) {
-            alert("CSVファイルを選択してください。");
+            alert("ファイルを選択してください。");
             return;
         }
 
