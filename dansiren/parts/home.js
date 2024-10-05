@@ -7,7 +7,7 @@ function main () {
     // IntersectionObserverのオプション
     const options = {
         root: null, // ビューポートをルートにする
-        threshold: 0.5 // スライドの50%が表示されたら検知
+        threshold: 0.8 // スライドの50%が表示されたら検知
     };
 
     // IntersectionObserverのコールバック
